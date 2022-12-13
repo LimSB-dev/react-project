@@ -5,7 +5,7 @@ import "./App.css";
 import React, { useState } from "react";
 
 function App() {
-  const [articles, setarticles] = useState([
+  let [articles, setarticles] = useState([
     {
       id: 0,
       title: "대전 노잼 도시",
@@ -27,9 +27,19 @@ function App() {
   ]);
 
   function likeClick(index) {
-    const like = articles[index].like;
-    console.log(like);
-    setarticles((articles[index].like = like + 1));
+    let copy_articles = [...articles];
+    let article = articles[index];
+    article.like = article.like + 1;
+    copy_articles[index] = article;
+    setarticles(copy_articles);
+  }
+
+  function button() {
+    let copy_articles = [...articles];
+    let article = articles[0];
+    article.title = "제목 변경";
+    copy_articles[0] = article;
+    setarticles(copy_articles);
   }
 
   const listItems = articles.map((article) => (
@@ -45,9 +55,12 @@ function App() {
   return (
     <div className="App">
       <div className="black-nav">
-        <img src={logo} alt="logo" style={{ width: "40px" }} />
-        <h4>블로그</h4>
+        <div style={{ display: "flex" }}>
+          <img src={logo} alt="logo" style={{ width: "40px" }} />
+          <h4>블로그</h4>
+        </div>
       </div>
+      <button onClick={button}>버튼</button>
       <div>{listItems}</div>
     </div>
   );
