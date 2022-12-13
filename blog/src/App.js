@@ -7,19 +7,16 @@ import React, { useState } from "react";
 function App() {
   let [articles, setarticles] = useState([
     {
-      id: 0,
       title: "대전 노잼 도시",
       content: "맛집은 그래도 많이 있네요.",
       like: 10,
     },
     {
-      id: 1,
       title: "대구 가지마요",
       content: "많이 보고싶을거야",
       like: 0,
     },
     {
-      id: 2,
       title: "수원도 가야지",
       content: "행궁동은 이제 그만",
       like: 0,
@@ -62,7 +59,8 @@ function App() {
   const listItems = articles.map((article) => (
     <div key={article.id} className="list">
       <h4>
-        {article.title} <span onClick={() => likeClick(article.id)}>❤️</span>{" "}
+        {article.title}{" "}
+        <button onClick={() => likeClick(articles.indexOf(article))}>❤️</button>{" "}
         {article.like}
       </h4>
       <p style={{ color: "gray", fontSize: "12px" }}>{article.content}</p>
