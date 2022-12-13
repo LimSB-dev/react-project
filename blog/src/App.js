@@ -27,19 +27,36 @@ function App() {
   ]);
 
   function likeClick(index) {
-    let copy_articles = [...articles];
+    let copyArticles = [...articles];
     let article = articles[index];
     article.like = article.like + 1;
-    copy_articles[index] = article;
-    setarticles(copy_articles);
+    copyArticles[index] = article;
+    setarticles(copyArticles);
   }
 
-  function button() {
-    let copy_articles = [...articles];
+  function editButton() {
+    let copyArticles = [...articles];
     let article = articles[0];
     article.title = "제목 변경";
-    copy_articles[0] = article;
-    setarticles(copy_articles);
+    copyArticles[0] = article;
+    setarticles(copyArticles);
+  }
+
+  function orderButton() {
+    let copyArticles = [...articles];
+    copyArticles.sort((a, b) => {
+      const titleA = a.title.toUpperCase();
+      const titleB = b.title.toUpperCase();
+      console.log(titleA, titleB);
+      if (titleA < titleB) {
+        return -1;
+      }
+      if (titleA > titleB) {
+        return 1;
+      }
+      return 0;
+    });
+    setarticles(copyArticles);
   }
 
   const listItems = articles.map((article) => (
@@ -60,7 +77,8 @@ function App() {
           <h4>블로그</h4>
         </div>
       </div>
-      <button onClick={button}>버튼</button>
+      <button onClick={editButton}>수정</button>
+      <button onClick={orderButton}>순서</button>
       <div>{listItems}</div>
     </div>
   );
